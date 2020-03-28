@@ -46,23 +46,23 @@ describe('Order Book', () => {
       expect(updatedBook).to.deep.equal([{ type: 'sell', quantity: 12, price: 5950 }])
     })
 
-    // it('fulfills an order and reduces the matching order when the book contains a matching order of a larger quantity', () => {
-    //   const existingBook = [{ type: 'buy', quantity: 15, price: 6150 }, { type: 'sell', quantity: 12, price: 6950 }]
-    //   const incomingOrder = { type: 'sell', quantity: 10, price: 6150 }
+    it('fulfills an order and reduces the matching order when the book contains a matching order of a larger quantity', () => {
+      const existingBook = [{ type: 'buy', quantity: 15, price: 6150 }, { type: 'sell', quantity: 12, price: 6950 }]
+      const incomingOrder = { type: 'sell', quantity: 10, price: 6150 }
 
-    //   const updatedBook = reconcileOrder(existingBook, incomingOrder)
+      const updatedBook = reconcileOrder(existingBook, incomingOrder)
 
-    //   expect(updatedBook).to.deep.equal([{ type: 'sell', quantity: 12, price: 6950 }, { type: 'buy', quantity: 5, price: 6150 }])
-    // })
+      expect(updatedBook).to.deep.equal([{ type: 'sell', quantity: 12, price: 6950 }, { type: 'buy', quantity: 5, price: 6150 }])
+    })
 
-    // it('partially fulfills an order, removes the matching order and adds the remainder of the order to the book when the book contains a matching order of a smaller quantity', () => {
-    //   const existingBook = [{ type: 'buy', quantity: 10, price: 6150 }, { type: 'sell', quantity: 12, price: 5950 }]
-    //   const incomingOrder = { type: 'sell', quantity: 15, price: 6150 }
+    it('partially fulfills an order, removes the matching order and adds the remainder of the order to the book when the book contains a matching order of a smaller quantity', () => {
+      const existingBook = [{ type: 'buy', quantity: 10, price: 6150 }, { type: 'sell', quantity: 12, price: 5950 }]
+      const incomingOrder = { type: 'sell', quantity: 15, price: 6150 }
 
-    //   const updatedBook = reconcileOrder(existingBook, incomingOrder)
+      const updatedBook = reconcileOrder(existingBook, incomingOrder)
 
-    //   expect(updatedBook).to.deep.equal([{ type: 'sell', quantity: 12, price: 5950 }, { type: 'sell', quantity: 5, price: 6150 }])
-    // })
+      expect(updatedBook).to.deep.equal([{ type: 'sell', quantity: 12, price: 5950 }, { type: 'sell', quantity: 5, price: 6150 }])
+    })
 
     // it('uses two existing orders to completely fulfill an order, removing the matching orders from the book', () => {
     //   const existingBook = [{ type: 'buy', quantity: 10, price: 6150 }, { type: 'buy', quantity: 5, price: 6150 }, { type: 'sell', quantity: 12, price: 5950 }]
