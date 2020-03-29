@@ -34,15 +34,13 @@ const reconcileOrder = (existingBook, incomingOrder) => {
     ]
   }
 
-  if (existingBook[orderIndex].quantity < incomingOrder.quantity) {
-    return [
-      ...removeOrderByIndex(existingBook, orderIndex),
-      {
-        ...incomingOrder,
-        quantity: incomingOrder.quantity - existingBook[orderIndex].quantity
-      }
-    ]
-  }
+  return reconcileOrder(
+    [...removeOrderByIndex(existingBook, orderIndex)],
+    {
+      ...incomingOrder,
+      quantity: incomingOrder.quantity - existingBook[orderIndex].quantity
+    }
+  )
 }
 
 module.exports = reconcileOrder
